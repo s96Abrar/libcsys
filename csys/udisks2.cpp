@@ -428,6 +428,10 @@ void UDisks2Filesystem::update()
 {
     mountPoints_.clear();
     QDBusMessage reply = dbusProp->call("Get", "org.freedesktop.UDisks2.Filesystem", "MountPoints");
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        // No such interface, the device had no filesystem
+        return;
+    }
     QVariant v = reply.arguments().first();
     QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
     arg.beginArray();
