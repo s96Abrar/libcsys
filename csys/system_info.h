@@ -1,10 +1,10 @@
 #ifndef SYSTEMINFO_H
 #define SYSTEMINFO_H
 
-#include "Utils/file_util.h"
-#include "Utils/format_util.h"
-#include "Utils/command_util.h"
-#include "Info/cpu_info.h"
+#include "file_util.h"
+#include "format_util.h"
+#include "command_util.h"
+#include "cpu_info.h"
 
 #define PROC_CPUINFO "/proc/cpuinfo"
 

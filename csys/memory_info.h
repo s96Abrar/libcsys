@@ -1,7 +1,7 @@
 #ifndef MEMORYINFO_H
 #define MEMORYINFO_H
 
-#include "Utils/file_util.h"
+#include "file_util.h"
 
 #define PROC_MEMINFO "/proc/meminfo"
 

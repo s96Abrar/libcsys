@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "Utils/file_util.h"
-#include "Utils/command_util.h"
+#include "file_util.h"
+#include "command_util.h"
 #include "process.h"
 
 #include "libcsys_global.h"

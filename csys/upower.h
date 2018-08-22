@@ -29,7 +29,9 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 class QDBusInterface;
 class QDBusServiceWatcher;
 
-class UPower : public QObject {
+#include "libcsys_global.h"
+
+class LIBCSYSSHARED_EXPORT UPower : public QObject {
     Q_OBJECT
     Q_CLASSINFO("author", "Brieuc ROBLIN")
     Q_CLASSINFO("url", "http://pt.pyrotools.org/")

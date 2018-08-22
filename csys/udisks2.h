@@ -29,7 +29,9 @@ class UDisks2Block;
 class UDisks2Drive;
 class UDisks2Filesystem;
 
-class UDisks2 : public QObject {
+#include "libcsys_global.h"
+
+class LIBCSYSSHARED_EXPORT UDisks2 : public QObject {
     Q_OBJECT
 
 public:

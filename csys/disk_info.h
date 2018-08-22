@@ -3,8 +3,8 @@
 
 #include <QStorageInfo>
 
-#include "Utils/command_util.h"
-#include "Utils/file_util.h"
+#include "command_util.h"
+#include "file_util.h"
 #include "libcsys_global.h"
 
 #define PROC_MOUNTS "/proc/mounts"

@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QVector>
 
-#include "Utils/file_util.h"
+#include "file_util.h"
 
 #define PROC_CPUINFO "/proc/cpuinfo"
 #define PROC_LOADAVG "/proc/loadavg"

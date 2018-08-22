@@ -22,10 +22,11 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include <QtDBus/QDBusInterface>
 #include <QSettings>
 
+#include "libcsys_global.h"
 
 class QDBusInterface;
 
-class Battery : public QObject {
+class LIBCSYSSHARED_EXPORT Battery : public QObject {
 
     Q_OBJECT
 
