@@ -6,11 +6,10 @@ TEMPLATE = lib
 # disable all build warnings
 CONFIG += silent warn_on static
 
-
 # Disable Debug on Release
-CONFIG(release):DEFINES += QT_NO_DEBUG_OUTPUT
+#CONFIG(release):DEFINES += QT_NO_DEBUG_OUTPUT
 
-VERSION = 1.0.9
+VERSION = 1.0.10
 DEFINES += LIBCSYS_LIBRARY
 
 HEADERS += \
@@ -56,7 +55,7 @@ unix {
                 PREFIX = /usr
         }
 
-        INSTALLS	+= target includes data
+        INSTALLS	+= target includes
         CONFIG		+= create_pc no_install_prl link_pkgconfig
         contains(DEFINES, LIB64): target.path = $$INSTALL_PREFIX/lib64
         else: target.path = $$INSTALL_PREFIX/lib
@@ -65,11 +64,8 @@ unix {
         includes.files	                = libcsys_global.h csys/*.h
         includes.path		        = $$PREFIX/include/csys
 
-        data.path = $$PREFIX/share/lib$$TARGET/
-        data.files = Changelog README
-
         QMAKE_PKGCONFIG_NAME = libcsys
-        QMAKE_PKGCONFIG_DESCRIPTION = Get system information using Qt 5
+        QMAKE_PKGCONFIG_DESCRIPTION = Library for coreapps
         QMAKE_PKGCONFIG_PREFIX  = $$INSTALL_PREFIX
         QMAKE_PKGCONFIG_LIBDIR  = $$target.path
         QMAKE_PKGCONFIG_INCDIR  = $$includes.path
