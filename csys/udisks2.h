@@ -154,6 +154,7 @@ private slots:
 
 private:
     QDBusInterface *dbus;
+
 };
 
 

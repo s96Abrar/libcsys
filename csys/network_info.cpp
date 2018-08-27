@@ -35,18 +35,14 @@ QString NetworkInfo::getDefaultNetworkInterface() const
 
 quint64 NetworkInfo::getRXbytes() const
 {
-    quint64 rx = FileUtil::readStringFromFile(rxPath)
-            .trimmed()
-            .toLong();
+    quint64 rx = static_cast<quint64>(FileUtil::readStringFromFile(rxPath).trimmed().toLong());
 
     return rx;
 }
 
 quint64 NetworkInfo::getTXbytes() const
 {
-    quint64 tx = FileUtil::readStringFromFile(txPath)
-            .trimmed()
-            .toLong();
+    quint64 tx = static_cast<quint64>(FileUtil::readStringFromFile(txPath).trimmed().toLong());
 
     return tx;
 }

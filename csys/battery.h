@@ -55,7 +55,7 @@ class LIBCSYSSHARED_EXPORT Battery : public QObject {
     Q_PROPERTY(double toEmpty READ toFull STORED false)
 
 public:
-    Battery(const QString & path, QObject *parent = 0);
+    Battery(const QString & path, QObject *parent = nullptr);
     ~Battery();
 
     /* Enums */

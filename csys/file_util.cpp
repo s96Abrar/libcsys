@@ -66,7 +66,7 @@ quint64 FileUtil::getFileSize(const QString &path)
     if (info.exists())
     {
         if (info.isFile()) {
-            totalSize += info.size();
+            totalSize += static_cast<quint64>(info.size());
         }
         else if (info.isDir()) {
 

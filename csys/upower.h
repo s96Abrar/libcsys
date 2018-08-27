@@ -37,7 +37,7 @@ class LIBCSYSSHARED_EXPORT UPower : public QObject {
     Q_CLASSINFO("url", "http://pt.pyrotools.org/")
 
 public:
-    UPower(QObject *parent = 0);
+    UPower(QObject *parent = nullptr);
     ~UPower();
 
     int numberOfBattery() const;
