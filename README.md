@@ -9,6 +9,7 @@ An Library of CoreApps family.libcsys is a library for DashBoard app.
 
 ### Dependencies:
 * qt5
+* qt5-charts
 
 ## Tested In
 * Manjaro xfce (Arch).
