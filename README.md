@@ -1,5 +1,5 @@
 # LibCSys
-An Library of CoreApps family.libcsys is a library for DashBoard app.
+An Library for CoreApps .
 
 ### Download
 
