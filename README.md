@@ -1,5 +1,5 @@
 # LibCSys
-An Library for CoreApps .
+An Library for CoreApps .It uses some parts of [Stacer](https://github.com/oguzhaninan/Stacer "Title") project.
 
 ### Download
 
