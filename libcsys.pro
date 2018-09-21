@@ -4,12 +4,12 @@ TARGET = csys
 TEMPLATE = lib
 
 # disable all build warnings
-CONFIG += silent warn_on static
+CONFIG += silent warn_on build_all
 
 # Disable Debug on Release
 #CONFIG(release):DEFINES += QT_NO_DEBUG_OUTPUT
 
-VERSION = 2.3
+VERSION = 1.3
 DEFINES += LIBCSYS_LIBRARY
 
 HEADERS += \
