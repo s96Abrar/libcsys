@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,7 +15,8 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #ifndef FORMAT_UTIL_H
 #define FORMAT_UTIL_H
@@ -24,17 +25,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
 
 #include "libcsys_global.h"
 
-
 class LIBCSYSSHARED_EXPORT FormatUtil
 {
-public:
-    static QString formatBytes(const quint64 &bytes);
-
 public:
     static const quint64 KIBI = 1024;
     static const quint64 MEBI = 1048576;
     static const quint64 GIBI = 1073741824;
     static const quint64 TEBI = 1099511627776;
+
+    static QString formatBytes(const quint64 &bytes);
 };
 
 #endif // FORMAT_UTIL_H

@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,10 +15,10 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #include "battery.h"
-
 
 Battery::Battery(const QString &path, QObject *parent)
     : QObject(parent), m_interface(nullptr),
@@ -33,7 +33,7 @@ Battery::~Battery() {
 }
 
 void Battery::createInterface() {
-    if(m_interface==nullptr || !m_interface->isValid()) {
+    if( m_interface == nullptr || !m_interface->isValid()) {
         m_interface = new QDBusInterface("org.freedesktop.UPower", m_path,
                                          "org.freedesktop.UPower.Device", QDBusConnection::systemBus(), this);
         //
@@ -178,7 +178,7 @@ double Battery::toFull() const {
 
 Battery::State Battery::state() const {
     uint state = m_interface->property("State").toUInt();
-    switch( state ) {
+    switch ( state ) {
         case static_cast<uint>(0):
             return FullyCharged;
             break;

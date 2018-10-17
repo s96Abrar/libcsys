@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,10 +15,13 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+*/
 
 #include "udisks2.h"
 
+const QString udisks_interface = "org.freedesktop.UDisks2";
+const QString udisks_path      = "/org/freedesktop/UDisks2";
 
 // Custom type for unmarhsalling byte arrays
 typedef QList<unsigned char> dbus_ay;
@@ -34,15 +37,15 @@ UDisks2::UDisks2(QObject *parent) :
     QObject(parent)
 {
     QDBusConnection system = QDBusConnection::systemBus();
-    system.connect("org.freedesktop.UDisks2",
-                   "/org/freedesktop/UDisks2",
+    system.connect(udisks_interface,
+                   udisks_path,
                    "org.freedesktop.DBus.ObjectManager",
                    "InterfacesAdded",
                    this,
                    SLOT(dbus_interfaceAdded(QDBusObjectPath,QMap<QString,QVariant>)));
 
-    system.connect("org.freedesktop.UDisks2",
-                   "/org/freedesktop/UDisks2",
+    system.connect(udisks_interface,
+                   udisks_path,
                    "org.freedesktop.DBus.ObjectManager",
                    "InterfacesRemoved",
                    this,
@@ -67,7 +70,7 @@ UDisks2::~UDisks2()
 
 QStringList UDisks2::blockDevices()
 {
-    QDBusInterface ud2("org.freedesktop.UDisks2",
+    QDBusInterface ud2(udisks_interface,
                        "/org/freedesktop/UDisks2/block_devices",
                        "org.freedesktop.DBus.Introspectable",
                        QDBusConnection::systemBus());
@@ -94,7 +97,7 @@ UDisks2Block *UDisks2::blockDevice(const QString &node)
 
 QStringList UDisks2::drives()
 {
-    QDBusInterface ud2("org.freedesktop.UDisks2",
+    QDBusInterface ud2(udisks_interface,
                        "/org/freedesktop/UDisks2/drives",
                        "org.freedesktop.DBus.Introspectable",
                        QDBusConnection::systemBus());
@@ -206,7 +209,7 @@ UDisks2Block::UDisks2Block(const QString &node, QObject *parent) :
     QObject(parent), name(node), fs(nullptr)
 {
     QDBusConnection system = QDBusConnection::systemBus();
-    dbus = new QDBusInterface("org.freedesktop.UDisks2",
+    dbus = new QDBusInterface(udisks_interface,
                               "/org/freedesktop/UDisks2/block_devices/" + node,
                               "org.freedesktop.UDisks2.Block",
                               system, parent);
@@ -317,7 +320,7 @@ UDisks2Drive::UDisks2Drive(const QString &node, QObject *parent) :
     QObject(parent), name(node)
 {
     QDBusConnection system = QDBusConnection::systemBus();
-    dbus = new QDBusInterface("org.freedesktop.UDisks2",
+    dbus = new QDBusInterface(udisks_interface,
                               "/org/freedesktop/UDisks2/drives/" + node,
                               "org.freedesktop.UDisks2.Drive",
                               system, parent);
@@ -341,7 +344,7 @@ QString UDisks2Drive::toStringToSeperate(int i) {
         return name;
         break;
     case 2:
-        return FormatUtil::formatBytes(static_cast<qint64>(size));
+        return FormatUtil::formatBytes(static_cast<quint64>(size));
         break;
     case 3:
         return vendor;
@@ -401,11 +404,11 @@ UDisks2Filesystem::UDisks2Filesystem(const QString &node, QObject *parent)
 {
     name = node;
     QDBusConnection system = QDBusConnection::systemBus();
-    dbus = new QDBusInterface("org.freedesktop.UDisks2",
+    dbus = new QDBusInterface(udisks_interface,
                               "/org/freedesktop/UDisks2/block_devices/" + node,
                               "org.freedesktop.UDisks2.Filesystem",
                               system, parent);
-    dbusProp = new QDBusInterface("org.freedesktop.UDisks2",
+    dbusProp = new QDBusInterface(udisks_interface,
                               "/org/freedesktop/UDisks2/block_devices/" + node,
                               "org.freedesktop.DBus.Properties",
                               system, parent);

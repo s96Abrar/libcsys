@@ -15,7 +15,8 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #ifndef CPUINFO_H
 #define CPUINFO_H
@@ -24,13 +25,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
 #include <QVector>
 
 #include "file_util.h"
-
-#define PROC_CPUINFO "/proc/cpuinfo"
-#define PROC_LOADAVG "/proc/loadavg"
-#define PROC_STAT    "/proc/stat"
-
 #include "libcsys_global.h"
 
+//#define PROC_CPUINFO "/proc/cpuinfo"
+//#define PROC_LOADAVG "/proc/loadavg"
+//#define PROC_STAT    "/proc/stat"
+
+const QString PROC_CPUINFO = "/proc/cpuinfo";
+const QString PROC_LOADAVG = "/proc/loadavg";
+const QString PROC_STAT    = "/proc/stat";
 
 class LIBCSYSSHARED_EXPORT CpuInfo
 {

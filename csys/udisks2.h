@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,7 +15,8 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+*/
 
 #ifndef UDISKS2_H
 #define UDISKS2_H
@@ -33,7 +34,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
 class UDisks2Block;
 class UDisks2Drive;
 class UDisks2Filesystem;
-
 
 class LIBCSYSSHARED_EXPORT UDisks2 : public QObject {
     Q_OBJECT
@@ -136,7 +136,7 @@ public:
     explicit UDisks2Drive(const QString &node, QObject *parent = nullptr);
 
     QString name;
-    qulonglong size;
+    quint64 size;
     QString vendor;
     QString model;
     QString serial;

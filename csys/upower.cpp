@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,10 +15,10 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #include "upower.h"
-
 
 const QString UPower::m_consolkit_interface = "org.freedesktop.ConsoleKit";
 const QString UPower::m_consolkit_path      = "/org/freedesktop/ConsoleKit/Manager";
@@ -42,7 +42,7 @@ UPower::~UPower() {
 
 void UPower::createDBusWatcher() {
     m_watcher = new QDBusServiceWatcher;
-    m_watcher->addWatchedService("org.freedesktop.UPower");
+    m_watcher->addWatchedService(m_upower_interface);
     m_watcher->setConnection(QDBusConnection::systemBus());
     m_watcher->setWatchMode(QDBusServiceWatcher::WatchForRegistration | QDBusServiceWatcher::WatchForUnregistration);
 

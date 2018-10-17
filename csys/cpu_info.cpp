@@ -1,5 +1,5 @@
 /*
-An Library for CoreApps .
+A Library for CoreApps .
 
 This file is part of libcsys.
 
@@ -15,10 +15,10 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA*/
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 #include "cpu_info.h"
-
 
 quint8 CpuInfo::getCpuCoreCount() const
 {
@@ -28,7 +28,7 @@ quint8 CpuInfo::getCpuCoreCount() const
         QStringList cpuinfo = FileUtil::readListFromFile(PROC_CPUINFO);
 
         if (! cpuinfo.isEmpty())
-            count = cpuinfo.filter(QRegExp("^processor")).count();
+            count = static_cast<quint8>(cpuinfo.filter(QRegExp("^processor")).count());
     }
 
     return count;
