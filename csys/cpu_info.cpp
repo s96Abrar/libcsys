@@ -114,8 +114,8 @@ int CpuInfo::getCpuPercent(const QList<double> &cpuTimes, const int &processor) 
         double idle_delta  = idle  - l_idles[processor];
         double total_delta = total - l_totals[processor];
 
-        if (static_cast<int>(total_delta))
-            utilisation = 100 * ((static_cast<int>(total_delta) - static_cast<int>(idle_delta)) / static_cast<int>(total_delta));
+        if (static_cast<double>(total_delta))
+            utilisation = 100 * ((static_cast<double>(total_delta) - static_cast<double>(idle_delta)) / static_cast<double>(total_delta));
 
         l_idles[processor] = idle;
         l_totals[processor] = total;
