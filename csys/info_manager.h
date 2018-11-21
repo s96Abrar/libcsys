@@ -21,22 +21,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef INFO_MANAGER_H
 #define INFO_MANAGER_H
 
-#include <QObject>
-
-#include "cpu_info.h"
-#include "disk_info.h"
-#include "memory_info.h"
-#include "network_info.h"
-#include "system_info.h"
-#include "process_info.h"
-
 #include "libcsys_global.h"
 
-class LIBCSYSSHARED_EXPORT InfoManager
-{
+#include <QFileInfoList>
+
+class Disk;
+class Process;
+class CpuInfo;
+class DiskInfo;
+class MemoryInfo;
+class NetworkInfo;
+class SystemInfo;
+class ProcessInfo;
+
+class LIBCSYSSHARED_EXPORT InfoManager {
 
 public:
     static InfoManager *ins();
+
+    InfoManager();
 
     quint8 getCpuCoreCount() const;
     QList<int> getCpuPercents() const;
@@ -51,7 +54,7 @@ public:
     quint64 getRXbytes() const;
     quint64 getTXbytes() const;
 
-    QList<Disk*> getDisks() const;
+    QList<Disk *> getDisks() const;
     QList<quint64> getDiskIO();
     void updateDiskInfo();
 
@@ -60,16 +63,16 @@ public:
     QFileInfoList getAppCaches() const;
 
     void updateProcesses();
-    QList<Process> getProcesses() const;
+    QList<Process *> getProcesses() const;
     QString getUserName() const;
 
 private:
-    CpuInfo ci;
-    DiskInfo di;
-    MemoryInfo mi;
-    NetworkInfo ni;
-    SystemInfo si;
-    ProcessInfo pi;
+    CpuInfo *ci = nullptr;
+    DiskInfo *di = nullptr;
+    MemoryInfo *mi = nullptr;
+    NetworkInfo *ni = nullptr;
+    SystemInfo *si = nullptr;
+    ProcessInfo *pi = nullptr;
 
     static InfoManager *instance;
 

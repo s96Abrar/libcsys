@@ -19,12 +19,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "memory_info.h"
-
+#include "file_util.h"
 
 MemoryInfo::MemoryInfo():
-    memTotal(0),
-    memFree(0),
-    memUsed(0)
+    memTotal( 0 ),
+    memFree( 0 ),
+    memUsed( 0 )
 { }
 
 /* https://access.redhat.com/solutions/406773
@@ -38,24 +38,24 @@ MemoryInfo::MemoryInfo():
 */
 void MemoryInfo::updateMemoryInfo()
 {
-    QStringList lines = FileUtil::readListFromFile(PROC_MEMINFO)
-            .filter(QRegExp("^MemTotal|^MemFree|^Buffers|^Cached|^SwapTotal|^SwapFree|^Shmem|^SReclaimable"));
-    QRegExp sep("\\s+");
+    QStringList lines = FileUtil::readListFromFile( PROC_MEMINFO )
+                        .filter( QRegExp( "^MemTotal|^MemFree|^Buffers|^Cached|^SwapTotal|^SwapFree|^Shmem|^SReclaimable" ) );
+    QRegExp sep( "\\s+" );
 
 #define getValue(l) static_cast<quint64>(lines.at(l).split(sep).at(1).toLong()) << 10;
-    memTotal = getValue(0);
-    memFree = getValue(1);
-    buffers = getValue(2);
-    cached = getValue(3);
-    swapTotal = getValue(4);
-    swapFree = getValue(5);
-    sreclaimable = getValue(6);
-    shmem = getValue(7);
+    memTotal = getValue( 0 );
+    memFree = getValue( 1 );
+    buffers = getValue( 2 );
+    cached = getValue( 3 );
+    swapTotal = getValue( 4 );
+    swapFree = getValue( 5 );
+    sreclaimable = getValue( 6 );
+    shmem = getValue( 7 );
 #undef getValue
 
-    cached = (cached + sreclaimable - shmem);
-    memUsed = (memTotal - (memFree + buffers + cached));
-    swapUsed = (swapTotal - swapFree);
+    cached = ( cached + sreclaimable - shmem );
+    memUsed = ( memTotal - ( memFree + buffers + cached ) );
+    swapUsed = ( swapTotal - swapFree );
 }
 
 quint64 MemoryInfo::getSwapUsed() const

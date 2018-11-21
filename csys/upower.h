@@ -21,30 +21,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef UPOWER_H
 #define UPOWER_H
 
-#include "battery.h"
-
-#include <QObject>
 #include <QMap>
-#include <QDBusObjectPath>
-#include <QtDBus>
-#include <QtDebug>
+#include "libcsys_global.h"
 
+class Battery;
+class QtDBus;
+class QDBusObjectPath;
 class QDBusInterface;
 class QDBusServiceWatcher;
 
-#include "libcsys_global.h"
-
 class LIBCSYSSHARED_EXPORT UPower : public QObject {
     Q_OBJECT
-    Q_CLASSINFO("author", "Brieuc ROBLIN")
-    Q_CLASSINFO("url", "http://pt.pyrotools.org/")
+    Q_CLASSINFO( "author", "Brieuc ROBLIN" )
+    Q_CLASSINFO( "url", "http://pt.pyrotools.org/" )
 
 public:
-    UPower(QObject *parent = nullptr);
+    UPower( QObject *parent = nullptr );
     ~UPower();
 
     int numberOfBattery() const;
-    const QMap<QString, Battery*> *batteries() const;
+    const QMap<QString, Battery *> *batteries() const;
     const QString version() const;
 
     bool isAvailable() const;
@@ -60,13 +56,13 @@ public:
 
 private:
     void createDBusWatcher();
-    bool addBattery(Battery *battery);
-    void removeBattery(Battery *battery);
+    bool addBattery( Battery *battery );
+    void removeBattery( Battery *battery );
 
     bool                    m_available;
     QDBusInterface          *m_interface;
     QDBusServiceWatcher     *m_watcher;
-    QMap<QString, Battery*> *m_batteries;
+    QMap<QString, Battery *> *m_batteries;
 
     static const QString m_consolkit_interface;
     static const QString m_consolkit_path;
@@ -79,14 +75,14 @@ public Q_SLOTS:
     void rebootSystem() const;
     void haltSystem() const;
 
-    Battery *battery(const QString &path) const;
+    Battery *battery( const QString &path ) const;
 
 private Q_SLOTS:
     void createDBusInterface();
     void clearBattery();
 
-    bool addBattery(const QDBusObjectPath &path);
-    void removeBattery(const QDBusObjectPath &path);
+    bool addBattery( const QDBusObjectPath &path );
+    void removeBattery( const QDBusObjectPath &path );
     void refreshBatteries();
 
 Q_SIGNALS:
@@ -95,16 +91,16 @@ Q_SIGNALS:
     void unavailable();
 
     /* Success & Fail messages */
-    void systemSuspend(bool);
-    void systemHibernate(bool);
-    void systemReboot(bool);
-    void systemHalt(bool);
+    void systemSuspend( bool );
+    void systemHibernate( bool );
+    void systemReboot( bool );
+    void systemHalt( bool );
 
     /* Battery notifications */
-    void batteryConnected(Battery *);
-    void batteryConnected(const QString &);
-    void batteryDisconnected(Battery *);
-    void batteryDisconnected(const QString &);
+    void batteryConnected( Battery * );
+    void batteryConnected( const QString & );
+    void batteryDisconnected( Battery * );
+    void batteryDisconnected( const QString & );
 };
 
 #endif

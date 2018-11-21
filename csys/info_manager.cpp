@@ -19,21 +19,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "info_manager.h"
+#include "cpu_info.h"
+#include "disk_info.h"
+#include "memory_info.h"
+#include "network_info.h"
+#include "system_info.h"
+#include "process.h"
+#include "process_info.h"
 
 InfoManager *InfoManager::instance = nullptr;
 
 InfoManager *InfoManager::ins()
 {
-    if(! instance){
+    if ( ! instance ) {
         instance = new InfoManager;
     }
 
     return instance;
 }
 
+InfoManager::InfoManager()
+{
+    ci = new CpuInfo;
+    di = new DiskInfo;
+    mi = new MemoryInfo;
+    ni = new NetworkInfo;
+    si = new SystemInfo;
+    pi = new ProcessInfo;
+}
+
 QString InfoManager::getUserName() const
 {
-    return si.getUsername();
+    return si->getUsername();
 }
 
 /*
@@ -41,17 +58,17 @@ QString InfoManager::getUserName() const
  */
 quint8 InfoManager::getCpuCoreCount() const
 {
-    return ci.getCpuCoreCount();
+    return ci->getCpuCoreCount();
 }
 
 QList<int> InfoManager::getCpuPercents() const
 {
-    return ci.getCpuPercents();
+    return ci->getCpuPercents();
 }
 
 QList<double> InfoManager::getCpuLoadAvgs() const
 {
-    return ci.getLoadAvgs();
+    return ci->getLoadAvgs();
 }
 
 /*
@@ -59,27 +76,27 @@ QList<double> InfoManager::getCpuLoadAvgs() const
  */
 void InfoManager::updateMemoryInfo()
 {
-    mi.updateMemoryInfo();
+    mi->updateMemoryInfo();
 }
 
 quint64 InfoManager::getSwapUsed() const
 {
-    return mi.getSwapUsed();
+    return mi->getSwapUsed();
 }
 
 quint64 InfoManager::getSwapTotal() const
 {
-    return mi.getSwapTotal();
+    return mi->getSwapTotal();
 }
 
 quint64 InfoManager::getMemUsed() const
 {
-    return mi.getMemUsed();
+    return mi->getMemUsed();
 }
 
 quint64 InfoManager::getMemTotal() const
 {
-    return mi.getMemTotal();
+    return mi->getMemTotal();
 }
 
 /*
@@ -87,17 +104,17 @@ quint64 InfoManager::getMemTotal() const
  */
 QList<Disk *> InfoManager::getDisks() const
 {
-    return di.getDisks();
+    return di->getDisks();
 }
 
 void InfoManager::updateDiskInfo()
 {
-    di.updateDiskInfo();
+    di->updateDiskInfo();
 }
 
 QList<quint64> InfoManager::getDiskIO()
 {
-    return di.getDiskIO();
+    return di->getDiskIO();
 }
 
 /********************
@@ -105,12 +122,12 @@ QList<quint64> InfoManager::getDiskIO()
  *******************/
 quint64 InfoManager::getRXbytes() const
 {
-    return ni.getRXbytes();
+    return ni->getRXbytes();
 }
 
 quint64 InfoManager::getTXbytes() const
 {
-    return ni.getTXbytes();
+    return ni->getTXbytes();
 }
 
 /********************
@@ -118,17 +135,17 @@ quint64 InfoManager::getTXbytes() const
  *******************/
 QFileInfoList InfoManager::getCrashReports() const
 {
-    return si.getCrashReports();
+    return si->getCrashReports();
 }
 
 QFileInfoList InfoManager::getAppLogs() const
 {
-    return si.getAppLogs();
+    return si->getAppLogs();
 }
 
 QFileInfoList InfoManager::getAppCaches() const
 {
-    return si.getAppCaches();
+    return si->getAppCaches();
 }
 
 /********************
@@ -136,12 +153,12 @@ QFileInfoList InfoManager::getAppCaches() const
  *******************/
 void InfoManager::updateProcesses()
 {
-    pi.updateProcesses();
+    pi->updateProcesses();
 }
 
-QList<Process> InfoManager::getProcesses() const
+QList<Process *> InfoManager::getProcesses() const
 {
-    return pi.getProcessList();
+    return pi->getProcessList();
 }
 
 

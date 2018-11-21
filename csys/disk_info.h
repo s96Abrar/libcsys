@@ -21,12 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef DISKINFO_H
 #define DISKINFO_H
 
-#include "command_util.h"
-#include "file_util.h"
 #include "libcsys_global.h"
-
-#include <QStorageInfo>
-#include <QString>
 
 //#define PROC_MOUNTS "/proc/mounts"
 
@@ -34,8 +29,7 @@ const QString PROC_MOUNTS = "/proc/mounts";
 
 class Disk;
 
-class LIBCSYSSHARED_EXPORT DiskInfo
-{
+class LIBCSYSSHARED_EXPORT DiskInfo {
 public:
     QList<Disk *> getDisks() const;
     void updateDiskInfo();

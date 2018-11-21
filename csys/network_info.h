@@ -21,15 +21,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef NETWORK_INFO_H
 #define NETWORK_INFO_H
 
-#include <QtNetwork/QNetworkInterface>
-#include <QDebug>
-
-#include "file_util.h"
-#include "command_util.h"
 #include "libcsys_global.h"
 
-class LIBCSYSSHARED_EXPORT NetworkInfo
-{
+class QNetworkInterface;
+
+class LIBCSYSSHARED_EXPORT NetworkInfo {
 public:
     NetworkInfo();
 

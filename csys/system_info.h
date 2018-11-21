@@ -21,20 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef SYSTEMINFO_H
 #define SYSTEMINFO_H
 
-#include "file_util.h"
-#include "format_util.h"
-#include "command_util.h"
-#include "cpu_info.h"
+#include <QFileInfoList>
 #include "libcsys_global.h"
-#include "libcsys_global.h"
-
-#include <QObject>
 
 //#define PROC_CPUINFO "/proc/cpuinfo"
 //const QString PROC_CPUINFO = "/proc/cpuinfo";
 
-class LIBCSYSSHARED_EXPORT SystemInfo
-{
+class LIBCSYSSHARED_EXPORT SystemInfo {
 public:
     SystemInfo();
 

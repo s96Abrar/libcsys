@@ -21,27 +21,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef PROCESS_INFO_H
 #define PROCESS_INFO_H
 
-#include "file_util.h"
-#include "command_util.h"
-#include "process.h"
-
-#include <QObject>
-#include <QDebug>
-
 #include "libcsys_global.h"
 
-class LIBCSYSSHARED_EXPORT ProcessInfo : public QObject
-{
+class Process;
+
+class LIBCSYSSHARED_EXPORT ProcessInfo : public QObject {
     Q_OBJECT
 
 public:
-    QList<Process> getProcessList() const;
+    QList<Process *> getProcessList() const;
 
 public slots:
     void updateProcesses();
 
 private:
-    QList<Process> processList;
+    QList<Process *> processList;
 };
 
 #endif // PROCESS_INFO_H

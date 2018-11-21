@@ -19,21 +19,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "network_info.h"
+#include "file_util.h"
+#include "command_util.h"
+
+#include <QtNetwork/QNetworkInterface>
 
 NetworkInfo::NetworkInfo()
 {
-    for (const QNetworkInterface &net: QNetworkInterface::allInterfaces()) {
-        if ((net.flags()  & QNetworkInterface::IsUp) &&
-            (net.flags()  & QNetworkInterface::IsRunning) &&
-            !(net.flags() & QNetworkInterface::IsLoopBack))
-        {
+    for ( const QNetworkInterface &net : QNetworkInterface::allInterfaces() ) {
+        if ( ( net.flags()  & QNetworkInterface::IsUp ) &&
+                ( net.flags()  & QNetworkInterface::IsRunning ) &&
+                !( net.flags() & QNetworkInterface::IsLoopBack ) ) {
             defaultNetworkInterface = net.name();
             break;
         }
     }
 
-    rxPath = QString("/sys/class/net/%1/statistics/rx_bytes").arg(defaultNetworkInterface);
-    txPath = QString("/sys/class/net/%1/statistics/tx_bytes").arg(defaultNetworkInterface);
+    rxPath = QString( "/sys/class/net/%1/statistics/rx_bytes" ).arg( defaultNetworkInterface );
+    txPath = QString( "/sys/class/net/%1/statistics/tx_bytes" ).arg( defaultNetworkInterface );
 }
 
 QList<QNetworkInterface> NetworkInfo::getAllInterfaces()
@@ -48,14 +51,14 @@ QString NetworkInfo::getDefaultNetworkInterface() const
 
 quint64 NetworkInfo::getRXbytes() const
 {
-    quint64 rx = static_cast<quint64>(FileUtil::readStringFromFile(rxPath).trimmed().toLong());
+    quint64 rx = static_cast<quint64>( FileUtil::readStringFromFile( rxPath ).trimmed().toLong() );
 
     return rx;
 }
 
 quint64 NetworkInfo::getTXbytes() const
 {
-    quint64 tx = static_cast<quint64>(FileUtil::readStringFromFile(txPath).trimmed().toLong());
+    quint64 tx = static_cast<quint64>( FileUtil::readStringFromFile( txPath ).trimmed().toLong() );
 
     return tx;
 }

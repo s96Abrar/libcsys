@@ -21,20 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef COMMAND_UTIL_H
 #define COMMAND_UTIL_H
 
-#include <QStringList>
-#include <QProcess>
-#include <QTextStream>
-#include <QStandardPaths>
-#include <QDebug>
-
 #include "libcsys_global.h"
 
-class LIBCSYSSHARED_EXPORT CommandUtil
-{
+class LIBCSYSSHARED_EXPORT CommandUtil {
 public:
-    static QString sudoExec(const QString &cmd, QStringList args = QStringList(), QByteArray data = QByteArray());
-    static QString exec(const QString &cmd, QStringList args = QStringList(), QByteArray data = QByteArray());
-    static bool isExecutable(const QString &cmd);
+    static QString sudoExec( const QString &cmd, QStringList args = QStringList(), QByteArray data = QByteArray() );
+    static QString exec( const QString &cmd, QStringList args = QStringList(), QByteArray data = QByteArray() );
+    static bool isExecutable( const QString &cmd );
 };
 
 #endif // COMMAND_UTIL_H

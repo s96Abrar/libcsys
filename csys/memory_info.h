@@ -21,20 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef MEMORYINFO_H
 #define MEMORYINFO_H
 
-#include "file_util.h"
-
-#include <QDebug>
-
-//#define PROC_MEMINFO "/proc/meminfo"
-
-const QString PROC_MEMINFO = "/proc/meminfo";
-
 #include "libcsys_global.h"
 
-class LIBCSYSSHARED_EXPORT MemoryInfo
-{
+//#define PROC_MEMINFO "/proc/meminfo"
+const QString PROC_MEMINFO = "/proc/meminfo";
+
+class LIBCSYSSHARED_EXPORT MemoryInfo {
 public:
-    MemoryInfo();
+    explicit MemoryInfo();
 
     void updateMemoryInfo();
 

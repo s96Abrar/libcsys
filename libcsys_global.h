@@ -22,6 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #define LIBCSYS_GLOBAL_H
 
 #include <QtCore/qglobal.h>
+#include <QObject>
+#include <QDebug>
 
 #if defined(LIBCSYS_LIBRARY)
 #  define LIBCSYSSHARED_EXPORT Q_DECL_EXPORT

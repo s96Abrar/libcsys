@@ -20,32 +20,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "file_util.h"
 
-QString FileUtil::readStringFromFile(const QString &path, const QIODevice::OpenMode &mode)
+#include <QFile>
+#include <QDir>
+#include <QTextStream>
+#include <QDirIterator>
+#include <QStandardPaths>
+#include <QSharedPointer>
+
+QString FileUtil::readStringFromFile( const QString &path, const QIODevice::OpenMode &mode )
 {
-    QSharedPointer<QFile> file(new QFile(path));
+    QSharedPointer<QFile> file( new QFile( path ) );
     QString data;
 
-    if(file->open(mode)) {
-      data = file->readAll();
-      file->close();
+    if ( file->open( mode ) ) {
+        data = file->readAll();
+        file->close();
     }
 
     return data;
 }
 
-QStringList FileUtil::readListFromFile(const QString &path, const QIODevice::OpenMode &mode)
+QStringList FileUtil::readListFromFile( const QString &path, const QIODevice::OpenMode &mode )
 {
-    QStringList list = FileUtil::readStringFromFile(path, mode).trimmed().split("\n");
+    QStringList list = FileUtil::readStringFromFile( path, mode ).trimmed().split( "\n" );
 
     return list;
 }
 
-bool FileUtil::writeFile(const QString &path, const QString &content, const QIODevice::OpenMode &mode)
+bool FileUtil::writeFile( const QString &path, const QString &content, const QIODevice::OpenMode &mode )
 {
-    QFile file(path);
+    QFile file( path );
 
-    if(file.open(mode)) {
-        QTextStream stream(&file);
+    if ( file.open( mode ) ) {
+        QTextStream stream( &file );
         stream << content.toUtf8() << endl;
         file.close();
         return true;
@@ -54,30 +61,31 @@ bool FileUtil::writeFile(const QString &path, const QString &content, const QIOD
     return false;
 }
 
-QStringList FileUtil::directoryList(const QString &path)
+QStringList FileUtil::directoryList( const QString &path )
 {
-    QDir dir(path);
+    QDir dir( path );
     QStringList list;
 
-    for (const QFileInfo &info : dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Files))
+    for ( const QFileInfo &info : dir.entryInfoList( QDir::NoDotAndDotDot | QDir::Files ) ) {
         list << info.fileName();
+    }
 
     return list;
 }
 
-quint64 FileUtil::getFileSize(const QString &path)
+quint64 FileUtil::getFileSize( const QString &path )
 {
     quint64 totalSize = 0;
-    QFileInfo info(path);
+    QFileInfo info( path );
 
-    if (info.exists()) {
-        if (info.isFile()) {
-            totalSize += static_cast<quint64>(info.size());
-        } else if (info.isDir()) {
-            QDir dir(path);
+    if ( info.exists() ) {
+        if ( info.isFile() ) {
+            totalSize += static_cast<quint64>( info.size() );
+        } else if ( info.isDir() ) {
+            QDir dir( path );
 
-            for (const QFileInfo &i : dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs)) {
-                totalSize += getFileSize(i.absoluteFilePath());
+            for ( const QFileInfo &i : dir.entryInfoList( QDir::NoDotAndDotDot | QDir::Files | QDir::Dirs ) ) {
+                totalSize += getFileSize( i.absoluteFilePath() );
             }
         }
     }

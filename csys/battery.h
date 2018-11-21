@@ -21,45 +21,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #ifndef BATTERY_H
 #define BATTERY_H
 
-#include <QObject>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusInterface>
-#include <QSettings>
-
 #include "libcsys_global.h"
 
 class QDBusInterface;
+class QDBusConnection;
+class QSettings;
 
 class LIBCSYSSHARED_EXPORT Battery : public QObject {
 
     Q_OBJECT
 
-    Q_ENUMS(State)
-    Q_PROPERTY(QString sysfsPath READ sysfsPath STORED false)
-    Q_PROPERTY(QString model READ model STORED false)
-    Q_PROPERTY(QString vendor READ vendor STORED false)
-    Q_PROPERTY(QString technology READ technology STORED false)
-    Q_PROPERTY(QString path READ path STORED false)
-    Q_PROPERTY(bool powerSupply READ powerSupply STORED false)
-    Q_PROPERTY(bool hasHistory READ hasHistory STORED false)
-    Q_PROPERTY(bool hasStatistics READ hasStatistics STORED false)
-    Q_PROPERTY(bool isPresent READ isPresent STORED false)
-    Q_PROPERTY(bool isRechargeable READ isRechargeable STORED false)
-    Q_PROPERTY(double energy READ energy STORED false)
-    Q_PROPERTY(double energyEmpty READ energyEmpty STORED false)
-    Q_PROPERTY(double energyFull READ energyFull STORED false)
-    Q_PROPERTY(double energyFullDesign READ energyFullDesign STORED false)
-    Q_PROPERTY(double energyRate READ energyRate STORED false)
-    Q_PROPERTY(double voltage READ voltage STORED false)
-    Q_PROPERTY(double percentage READ percentage STORED false)
-    Q_PROPERTY(double capacity READ capacity STORED false)
-    Q_PROPERTY(State state READ state STORED false)
-    Q_PROPERTY(int lowLevel READ lowLevel)
-    Q_PROPERTY(double toFull READ toFull STORED false)
-    Q_PROPERTY(double toEmpty READ toFull STORED false)
+    Q_ENUMS( State )
+    Q_PROPERTY( QString sysfsPath READ sysfsPath STORED false )
+    Q_PROPERTY( QString model READ model STORED false )
+    Q_PROPERTY( QString vendor READ vendor STORED false )
+    Q_PROPERTY( QString technology READ technology STORED false )
+    Q_PROPERTY( QString path READ path STORED false )
+    Q_PROPERTY( bool powerSupply READ powerSupply STORED false )
+    Q_PROPERTY( bool hasHistory READ hasHistory STORED false )
+    Q_PROPERTY( bool hasStatistics READ hasStatistics STORED false )
+    Q_PROPERTY( bool isPresent READ isPresent STORED false )
+    Q_PROPERTY( bool isRechargeable READ isRechargeable STORED false )
+    Q_PROPERTY( double energy READ energy STORED false )
+    Q_PROPERTY( double energyEmpty READ energyEmpty STORED false )
+    Q_PROPERTY( double energyFull READ energyFull STORED false )
+    Q_PROPERTY( double energyFullDesign READ energyFullDesign STORED false )
+    Q_PROPERTY( double energyRate READ energyRate STORED false )
+    Q_PROPERTY( double voltage READ voltage STORED false )
+    Q_PROPERTY( double percentage READ percentage STORED false )
+    Q_PROPERTY( double capacity READ capacity STORED false )
+    Q_PROPERTY( State state READ state STORED false )
+    Q_PROPERTY( int lowLevel READ lowLevel )
+    Q_PROPERTY( double toFull READ toFull STORED false )
+    Q_PROPERTY( double toEmpty READ toFull STORED false )
 
 public:
-    Battery(const QString & path, QObject *parent = nullptr);
+    Battery( const QString &path, QObject *parent = nullptr );
     ~Battery();
 
     /* Enums */
@@ -70,7 +67,7 @@ public:
     QString model() const;
     QString vendor() const;
     QString technology() const;
-    const QString & path() const;
+    const QString &path() const;
 
     bool powerSupply() const;
     bool hasHistory() const;
@@ -90,7 +87,7 @@ public:
     double toFull() const;
     double toEmpty() const;
     int lowLevel() const;
-    void setLowLevel(int value);
+    void setLowLevel( int value );
 
     Battery::State state() const;
 

@@ -19,21 +19,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "disk_info.h"
+#include "command_util.h"
+#include "file_util.h"
+
+#include <QStorageInfo>
 
 QList<Disk *> DiskInfo::getDisks() const
 {
-    QList<Disk*> lists;
+    QList<Disk *> lists;
     lists.clear();
 
     QList<QStorageInfo> storageInfoList = QStorageInfo::mountedVolumes();
 
-    for(const QStorageInfo &info: storageInfoList) {
+    for ( const QStorageInfo &info : storageInfoList ) {
         Disk *disk = new Disk;
         disk->name = info.displayName();
         disk->device = info.device();
-        disk->size = static_cast<quint64>(info.bytesTotal());
-        disk->used = static_cast<quint64>(info.bytesTotal()) - static_cast<quint64>(info.bytesFree());
-        disk->free = static_cast<quint64>(info.bytesFree());
+        disk->size = static_cast<quint64>( info.bytesTotal() );
+        disk->used = static_cast<quint64>( info.bytesTotal() ) - static_cast<quint64>( info.bytesFree() );
+        disk->free = static_cast<quint64>( info.bytesFree() );
 
         lists << disk;
     }
@@ -52,13 +56,13 @@ QList<quint64> DiskInfo::getDiskIO() const
 
     QList<quint64> diskReadWrite;
 
-    QStringList diskStat = FileUtil::readStringFromFile(QString("/sys/block/%1/stat").arg(diskName))
-            .trimmed()
-            .split(QRegExp("\\s+"));
+    QStringList diskStat = FileUtil::readStringFromFile( QString( "/sys/block/%1/stat" ).arg( diskName ) )
+                           .trimmed()
+                           .split( QRegExp( "\\s+" ) );
 
-    if (diskStat.count() > 7) {
-        diskReadWrite.append(static_cast<unsigned long long>(diskStat.at(2).toLongLong()) * 512);
-        diskReadWrite.append(static_cast<unsigned long long>(diskStat.at(6).toLongLong()) * 512);
+    if ( diskStat.count() > 7 ) {
+        diskReadWrite.append( static_cast<unsigned long long>( diskStat.at( 2 ).toLongLong() ) * 512 );
+        diskReadWrite.append( static_cast<unsigned long long>( diskStat.at( 6 ).toLongLong() ) * 512 );
     }
 
     return diskReadWrite;
@@ -66,12 +70,13 @@ QList<quint64> DiskInfo::getDiskIO() const
 
 QString DiskInfo::getDiskName() const
 {
-    QDir blocks("/sys/block");
+    QDir blocks( "/sys/block" );
 
-    for (const QFileInfo& entryInfo : blocks.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
-        if (QFile::exists(QString("%1/device").arg(entryInfo.absoluteFilePath()))) {
+    for ( const QFileInfo &entryInfo : blocks.entryInfoList( QDir::AllEntries | QDir::NoDotAndDotDot ) ) {
+        if ( QFile::exists( QString( "%1/device" ).arg( entryInfo.absoluteFilePath() ) ) ) {
             return entryInfo.baseName();
         }
     }
+
     return QString();
 }
